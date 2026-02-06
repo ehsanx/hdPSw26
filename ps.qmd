@@ -1,0 +1,173 @@
+# Propensity score
+
+```{r, cache=TRUE, message=FALSE, warning=FALSE, echo=FALSE}
+require(autoCovariateSelection)
+require(dplyr)
+require(cobalt)
+library(ggplot2)
+require(WeightIt)
+library(lmtest)
+load(file = "data/dfx7.RData")
+```
+
+::: callout-tip
+# Compare
+
+Compare the measures of association with those obtained from a regular propensity score method, so that we can compare the estimates.
+:::
+
+## Fitting PS model to obtain OR
+
+### Create propensity score formula
+
+```{r, cache=TRUE}
+covform <- paste0(investigator.specified.covariates, collapse = "+")
+ps.formula <- as.formula(paste0("exposure", "~", covform))
+ps.formula
+```
+
+::: column-margin
+- Only use investigator specified covariates to build the formula.
+- During the construction of the propensity score model, researchers should consider incorporating additional model specifications, such as interactions and polynomials, if they are deemed necessary.
+:::
+
+::: callout-tip
+# Overfitting
+
+Propensity score models typically involve a greater number of covariates and incorporate other functional specifications (interactions) [@ho2007matching]. In this context, **overfitting** is generally considered to be less worrisome as long as satisfactory overlap and balance diagnostics are achieved. This is because, some researchers suggest that propensity score model is meant to be descriptive of the data in hand, and should not be generalizabled [@judkins2007variable]. However, there is a limit to it. Recent literature did suggest that propensity score model overfitting can lead to inflated variance of estimated treatment effect estimate [@schuster2016propensity]. While the standard errors of the beta coefficients from the propensity score model are not typically a primary concern, it is generally advisable to examine them as part of the diagnostics process for assessing the propensity score model [@platt2019comparison]. Specifically, techniques like double cross-fitting have demonstrated promise in minimizing the aforementioned impact [@hdps23].
+:::
+
+### Fit PS model
+
+```{r, cache=TRUE}
+require(WeightIt)
+W.out <- weightit(ps.formula, 
+                    data = hdps.data, 
+                    estimand = "ATE",
+                    method = "ps")
+```
+
+::: column-margin
+- Use that formula to estimate propensity scores.
+- In this demonstration, we did not use `stabilize = TRUE`. However, stabilized propensity score weights often reduce the variance of treatment effect estimates. 
+:::
+
+### Obtain PS
+
+```{r, cache=TRUE, echo=FALSE}
+hdps.data$ps <- W.out$ps
+ggplot(hdps.data, aes(x = ps, fill = factor(exposure))) +
+  geom_density(alpha = 0.5) +
+  scale_fill_manual(values = c("darkblue", "darkred")) +
+  theme_classic()
+```
+
+::: column-margin
+Check propensity score overlap in both exposure groups. Similar as before?
+:::
+
+### Obtain Weights
+
+```{r, cache=TRUE, echo=FALSE}
+hdps.data$w <- W.out$weights
+ggplot(hdps.data, aes(x = "", y = w)) +
+  geom_boxplot(fill = "lightblue", 
+               color = "blue", 
+               size = 1) +
+  geom_text(aes(x = 1, y = max(w), 
+                label = paste0("Max = ", round(max(w), 2))), 
+            vjust = 1.5, 
+            hjust = -0.3, 
+            size = 4, 
+            color = "red") +
+  geom_text(aes(x = 1, y = min(w), 
+                label = paste0("Min = ", round(min(w), 2))), 
+            vjust = -2.5, 
+            hjust = -0.3, 
+            size = 4, 
+            color = "red") +
+  ggtitle("Boxplot of Inverse Probability Weights") +
+  xlab("") +
+  ylab("Weights") +
+  theme_classic()
+```
+
+::: column-margin
+- Check the summary statistics of the weights to assess whether there are extreme weights. Less extreme weights now?
+:::
+
+### Assessing balance
+
+```{r, cache=TRUE, echo=FALSE}
+require(cobalt)
+love.plot(x = W.out,
+          thresholds = c(m = .1), 
+          var.order = "unadjusted",
+          stars = "raw")
+```
+
+::: column-margin
+- Assess balance against SMD 0.1. Still balanced?
+- Predictive measures such as c-statistics are not helpful in this context [@westreich2011role]: "use of the c-statistic as a guide in constructing propensity scores may result in less overlap in propensity scores between treated and untreated subjects"!
+:::
+
+### Set outcome formula
+
+```{r, cache=TRUE}
+out.formula <- as.formula(paste0("outcome", "~", "exposure"))
+out.formula
+```
+
+::: column-margin
+We are again using a crude weighted outcome model here.
+:::
+
+### Obtain OR from unadjusted model
+
+```{r, cache=TRUE, warning=FALSE, message=FALSE}
+fit <- glm(out.formula,
+            data = hdps.data,
+            weights = W.out$weights,
+            family= binomial(link = "logit"))
+fit.summary <- summary(fit)$coef["exposure",
+                                 c("Estimate", 
+                                   "Std. Error", 
+                                   "Pr(>|z|)")]
+fit.ci <- confint(fit, level = 0.95)["exposure", ]
+fit.summary_with_ci.ps <- c(fit.summary, fit.ci)
+round(fit.summary_with_ci.ps,2) 
+```
+
+## Fitting crude model to obtain OR
+
+::: callout-tip
+# Crude association
+
+Here we estimate the crude association between the exposure and the outcome.
+:::
+
+```{r, cache=TRUE, warning=FALSE, message=FALSE}
+fit <- glm(out.formula,
+            data = hdps.data,
+            family= binomial(link = "logit"))
+fit.summary <- summary(fit)$coef["exposure",
+                                 c("Estimate", 
+                                   "Std. Error", 
+                                   "Pr(>|z|)")]
+fit.ci <- confint(fit, level = 0.95)["exposure", ]
+fit.summary_with_ci.crude <- c(fit.summary, fit.ci)
+round(fit.summary_with_ci.crude,2) 
+```
+
+::: column-margin
+No adjustment at all!
+:::
+
+```{r, cache=TRUE, message=FALSE, warning=FALSE, echo=FALSE}
+save(dfx, patientIds, basetable, df, df2, step1, out1, step2, out2, out3,
+     hdps.data, exposure, outcome, investigator.specified.covariates,
+     proxyform, W.out, proxy.list.sel,fit.summary_with_ci.hdps,
+     fit.summary_with_ci.ps,
+     file = "data/dfx8.RData")
+save(fit.summary_with_ci.crude, file = "data/crude.RData")
+```
