@@ -24,7 +24,7 @@
     "href": "index.html#purpose-of-the-workshop",
     "title": "High-Dimensional Propensity Scores",
     "section": "Purpose of the workshop",
-    "text": "Purpose of the workshop\nThis workshop will\n\ndemonstrate logic, steps and implementation guidelines of hdPS utilizing an open data source as an example (using reproducible R codes),\n\n\n\n\n\n\n\n\n\n\n\nfamiliarize participants with the difference between propensity score vs. hdPS,\nexplain the rationale for using the machine learning extensions of hdPS, and their statistical properties, and\ndiscuss advantages, controversies, and hdPS reporting guidelines while writing a manuscript.",
+    "text": "Purpose of the workshop\nThe primary goal of this workshop is to provide a practical foundation in hdPS. Specifically, we will:\n\nSystematize the hdPS Workflow: Walk through the underlying logic, sequential steps, and implementation guidelines using reproducible R code applied to an open-source dataset.\nContrast Methodologies: Clarify the distinctions between standard Propensity Score analysis and the high-dimensional framework.",
     "crumbs": [
       "Background"
     ]
@@ -1695,6 +1695,16 @@
     "crumbs": [
       "Appendix: NHANES",
       "<span class='chapter-number'>34</span>  <span class='chapter-title'>Merge three cycles</span>"
+    ]
+  },
+  {
+    "objectID": "index.html#extended-learning-resources",
+    "href": "index.html#extended-learning-resources",
+    "title": "High-Dimensional Propensity Scores",
+    "section": "Extended Learning Resources",
+    "text": "Extended Learning Resources\nTo provide a comprehensive view beyond our live session, this website includes supplementary modules designed for independent study. These materials offer deeper dives into:\n\nAlgorithmic Extensions: The statistical properties and rationale for integrating Machine Learning with hdPS.\nComplex Data Structures: The adaptation and implementation of hdPS within survival analysis and longitudinal data frameworks to handle time-varying complexities.\nCritical Appraisal & Publication: A discussion on current controversies, methodological advantages, and best practices for reporting hdPS results in peer-reviewed manuscripts.",
+    "crumbs": [
+      "Background"
     ]
   }
 ]
