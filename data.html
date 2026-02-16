@@ -587,6 +587,50 @@ div.csl-indent {
 </div>
 </div>
 </div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Variable Selection Strategy
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In standard Propensity Score analysis, we rely on <strong>Investigator-Specified Covariates</strong>. According to causal theory, we should include:</p>
+<ul>
+<li>✅ <strong>Confounders:</strong> Variables causing both Exposure and Outcome.</li>
+<li>✅ <strong>Risk Factors:</strong> Variables causing the Outcome (to improve precision)</li>
+</ul>
+<p>We must avoid:</p>
+<ul>
+<li>❌ <strong>Instruments:</strong> Variables causing Exposure only (increases variance/bias).</li>
+<li>❌ <strong>Colliders:</strong> Effects of both Exposure and Outcome (induces bias).</li>
+</ul>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Measured vs.&nbsp;unmeasured
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>When using secondary data sources such as NHANES or health administrative databases, the data is often collected for <strong>administrative, billing or general monitoring</strong> rather than specific research questions. Because <strong>researchers do not have control over which variables are included in the survey/questionnaire</strong>, essential variables required to fully adjust for bias (confounders) may be missing.</p>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/s0y.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:90.0%"></p>
+</figure>
+</div>
+</div>
+</div>
 
 <div class="no-row-height column-margin column-container"><div class="">
 <p><strong>Exposure</strong>: Being obese</p>
@@ -810,7 +854,7 @@ Crude association
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="data_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="data_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>

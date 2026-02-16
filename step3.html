@@ -162,9 +162,9 @@ window.Quarto = {
 
 <meta name="twitter:title" content="6&nbsp; Step 3: Recurrence – High-Dimensional Propensity Scores">
 <meta name="twitter:description" content="">
-<meta name="twitter:image" content="https://ehsank.com/images/step3.png">
-<meta name="twitter:image-height" content="722">
-<meta name="twitter:image-width" content="1582">
+<meta name="twitter:image" content="https://ehsank.com/images/s3y.png">
+<meta name="twitter:image-height" content="1487">
+<meta name="twitter:image-width" content="2752">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
@@ -554,6 +554,28 @@ window.Quarto = {
 </header>
 
 
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In Step 3, we take that filtered list and process them further to create binary variables for the analysis.</p>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/s3y.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:90.0%"></p>
+</figure>
+</div>
+</div>
+</div>
 <section id="genrate-recurrence-covariates" class="level2 page-columns page-full" data-number="6.1">
 <h2 data-number="6.1" class="anchored" data-anchor-id="genrate-recurrence-covariates"><span class="header-section-number">6.1</span> Genrate recurrence covariates</h2>
 
@@ -606,6 +628,33 @@ window.Quarto = {
 <p><img src="images/step3.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:90.0%"></p>
 </figure>
 </div>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In this step, the algorithm analyzes the specific ICD-10-CM code D64.9 (Anemia, unspecified). This code was selected in Step 2 because it appeared frequently enough in the overall dataset (e.g., in at least 20 patients).</p>
+<p><strong>The Goal</strong>: The algorithm must convert the simple count of how many times a patient had an anemia diagnosis into binary (Yes/No) variables. This is necessary because the Bross formula used in the next step requires binary inputs.</p>
+<p>For the anemia code (D64.9), the algorithm generates three distinct “Recurrence Covariates” for every patient. To determine if a patient gets a “Yes” (1) or “No” (0) for these variables, their personal frequency is compared against the population’s statistics (Median and 75th Percentile).</p>
+<ul>
+<li>Did the patient have the anemia code at least once during the assessment window? (<code>rec_dx_D64_once</code>)</li>
+<li>Did the patient have the anemia code more often than the median frequency of the population? (<code>rec_dx_D64_sporadic</code>)</li>
+<li>Did the patient have the anemia code more often than the 75th percentile of the population? (<code>rec_dx_D64_frequent</code>)</li>
+</ul>
+<p><strong>Output</strong>: Instead of simply recording that Patient A had “2 counts of anemia,” the hdPS algorithm assigns them three binary flags for this specific condition:</p>
+<ul>
+<li>Once: yes/no</li>
+<li>Sporadic: yes/no</li>
+<li>Frequent: yes/no</li>
+</ul>
+<p>This process creates a detailed profile of the intensity of the patient’s interaction with the healthcare system regarding anemia.</p>
 </div>
 </div>
 <table class="caption-top table">

@@ -561,6 +561,30 @@ window.Quarto = {
 
 <section id="bross-formula" class="level2 page-columns page-full" data-number="7.1">
 <h2 data-number="7.1" class="anchored" data-anchor-id="bross-formula"><span class="header-section-number">7.1</span> Bross formula</h2>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The Bross formula is a statistical tool used to quantify the potential impact of unmeasured confounding on a research finding. Specifically, it measures the amount of bias, often referred to as a <strong>“Bias Multiplier”</strong>, that results from failing to adjust for a binary confounding variable.</p>
+<p><strong>Key Components of the Measurement</strong>:</p>
+<ul>
+<li>Prevalence in the Exposed Group</li>
+<li>Prevalence in the Unexposed Group</li>
+<li>Confounder-Outcome Association</li>
+</ul>
+<p><strong>Application in hdPS</strong>:</p>
+<ul>
+<li>In the context of hdPS algorithm, the formula is used to assess the potential impact of each recurrence covariate (proxy variable).</li>
+<li>By plugging the observed prevalence and association data for these proxies into the Bross formula, researchers can rank which variables are most likely to reduce residual confounding when included in the final model.</li>
+</ul>
+</div>
+</div>
 <p>We need to make an educated guess about 3 components (i.e., <mark>make an assumption</mark>), that are used in the calculation of <mark>bias contributed by not adjusting for a covariate</mark> based on <a href="https://pubmed.ncbi.nlm.nih.gov/5966011/">Bross (1966)</a> formula:</p>
 
 <div class="no-row-height column-margin column-container"><div class="">

@@ -491,7 +491,7 @@ div.csl-indent {
 </header>
 
 
-<p>Double Cross-Fit TMLE (DC-TMLE) <span class="citation" data-cites="mondol2024towards karim2025splits">(<a href="references.html#ref-mondol2024towards" role="doc-biblioref">Mondol and Karim 2024</a>; <a href="references.html#ref-karim2025splits" role="doc-biblioref">M. Karim and Mondol 2025</a>)</span> is an extension of TMLE designed to improve robustness and reduce overfitting when using flexible, high-dimensional or machine learning-based models. It works by splitting the data into <strong>multiple folds</strong>, training nuisance models (e.g., the propensity score and outcome regressions) on one subset, and then evaluating the targeted update and parameter estimation on another. This sample-splitting (cross-fitting) procedure helps ensure that the estimation step is not biased by the same data used to fit the nuisance models. This process of sample-splitting and estimation is <strong>repeated</strong>, and the results are averaged to produce a final, stable estimate. DC-TMLE maintains double robustness, meaning it remains consistent if either the treatment or outcome model is correctly specified, and it provides valid statistical inference even in high-dimensional settings where traditional TMLE may be unstable.</p>
+<p>Double Cross-Fit TMLE (DC-TMLE) <span class="citation" data-cites="mondol2024towards karim2025splits">(<a href="references.html#ref-mondol2024towards" role="doc-biblioref">Mondol and Karim 2024</a>; <a href="references.html#ref-karim2025splits" role="doc-biblioref">Karim and Mondol 2025</a>)</span> is an extension of TMLE designed to improve robustness and reduce overfitting when using flexible, high-dimensional or machine learning-based models. It works by splitting the data into <strong>multiple folds</strong>, training nuisance models (e.g., the propensity score and outcome regressions) on one subset, and then evaluating the targeted update and parameter estimation on another. This sample-splitting (cross-fitting) procedure helps ensure that the estimation step is not biased by the same data used to fit the nuisance models. This process of sample-splitting and estimation is <strong>repeated</strong>, and the results are averaged to produce a final, stable estimate. DC-TMLE maintains double robustness, meaning it remains consistent if either the treatment or outcome model is correctly specified, and it provides valid statistical inference even in high-dimensional settings where traditional TMLE may be unstable.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -504,7 +504,7 @@ div.csl-indent {
 </div>
 <section id="background" class="level2" data-number="19.1">
 <h2 data-number="19.1" class="anchored" data-anchor-id="background"><span class="header-section-number">19.1</span> Background</h2>
-<p>Residual confounding remains a persistent challenge in observational studies, particularly with high-dimensional data <span class="citation" data-cites="karim2025tmle">(<a href="references.html#ref-karim2025tmle" role="doc-biblioref">M. E. Karim and Lei 2025</a>)</span>. Recent work evaluates traditional and machine learning-based extensions of hdPS methods, including Super Learner (SL), TMLE, and Double Cross-Fit TMLE (DC-TMLE).</p>
+<p>Residual confounding remains a persistent challenge in observational studies, particularly with high-dimensional data <span class="citation" data-cites="karim2025tmle">(<a href="references.html#ref-karim2025tmle" role="doc-biblioref">Karim and Lei 2025</a>)</span>. Recent work evaluates traditional and machine learning-based extensions of hdPS methods, including Super Learner (SL), TMLE, and Double Cross-Fit TMLE (DC-TMLE).</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -515,7 +515,7 @@ Tip
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><span class="citation" data-cites="karim2025tmle">(<a href="references.html#ref-karim2025tmle" role="doc-biblioref">M. E. Karim and Lei 2025</a>)</span></p>
+<p><span class="citation" data-cites="karim2025tmle">(<a href="references.html#ref-karim2025tmle" role="doc-biblioref">Karim and Lei 2025</a>)</span></p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -659,11 +659,11 @@ Tip
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
-<div id="ref-karim2025splits" class="csl-entry" role="listitem">
-Karim, ME, and MH Mondol. 2025. <span>“Finding the Optimal Number of Splits and Repetitions in Double Cross-Fitting Targeted Maximum Likelihood Estimators.”</span> <em>Pharmaceutical Statistics</em>.
-</div>
 <div id="ref-karim2025tmle" class="csl-entry" role="listitem">
 Karim, Mohammad Ehsanul, and Yang Lei. 2025. <span>“How Effective Are Machine Learning and Doubly Robust Estimators in Incorporating High-Dimensional Proxies to Reduce Residual Confounding?”</span> <em>Pharmacoepidemiology and Drug Safety</em> 34 (5): e70155.
+</div>
+<div id="ref-karim2025splits" class="csl-entry" role="listitem">
+Karim, Mohammad Ehsanul, and Momenul Haque Mondol. 2025. <span>“Finding the Optimal Number of Splits and Repetitions in Double Cross-Fitting Targeted Maximum Likelihood Estimators.”</span> <em>Pharmaceutical Statistics</em> 24 (5): e70022.
 </div>
 <div id="ref-mondol2024towards" class="csl-entry" role="listitem">
 Mondol, MH, and ME Karim. 2024. <span>“Towards Robust Causal Inference in Epidemiological Research: Employing Double Cross-Fit TMLE in Right Heart Catheterization Data.”</span> <em>American Journal of Epidemiology</em>, kwae447.

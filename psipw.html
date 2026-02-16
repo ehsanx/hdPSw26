@@ -601,7 +601,10 @@ Propensity Score Analysis
 </section>
 <section id="propensity-score-weighting" class="level2 page-columns page-full" data-number="2.2">
 <h2 data-number="2.2" class="anchored" data-anchor-id="propensity-score-weighting"><span class="header-section-number">2.2</span> Propensity Score Weighting</h2>
-<p>For this demonstration, we will focus on the <strong>Weighting</strong> approach. The other approaches are not covered in this demonstration, but they can be implemented using similar steps as shown below.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p><span class="citation" data-cites="austin2015moving">Austin and Stuart (<a href="references.html#ref-austin2015moving" role="doc-biblioref">2015</a>)</span></p>
+</div></div><p>For this demonstration, we will focus on the <strong>Weighting</strong> approach. The other approaches are not covered in this demonstration, but they can be implemented using similar steps as shown below.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -1092,33 +1095,10 @@ Important
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     protein.total + bilirubin.total + phosphorus + sodium + potassium + </span></span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     globulin + calcium.total + systolicBP + diastolicBP + high.cholesterol</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Variable Selection Strategy
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>In standard Propensity Score analysis, we rely on <strong>Investigator-Specified Covariates</strong>. According to causal theory, we should include:</p>
-<ul>
-<li>✅ <strong>Confounders:</strong> Variables causing both Exposure and Outcome.</li>
-<li>✅ <strong>Risk Factors:</strong> Variables causing the Outcome (to improve precision)</li>
-</ul>
-<p>We must avoid:</p>
-<ul>
-<li>❌ <strong>Instruments:</strong> Variables causing Exposure only (increases variance/bias).</li>
-<li>❌ <strong>Colliders:</strong> Effects of both Exposure and Outcome (induces bias).</li>
-</ul>
-<p><strong>Transition to hdPS:</strong> Later, we will see how hdPS automates this selection when we have thousands of potential proxies!</p>
-</div>
-</div>
 
 <div class="no-row-height column-margin column-container"><div class="">
 <ul>
-<li>Only use investigator specified covariates to build the formula.</li>
+<li>Only use *investigator specified covariates** to build the formula.</li>
 <li>During the construction of the propensity score model, researchers should consider incorporating additional model specifications, such as interactions and polynomials, if they are deemed necessary.</li>
 </ul>
 </div></div></section>
@@ -1549,6 +1529,15 @@ Warning
 </section>
 <section id="summary-of-causal-inference-methods" class="level2" data-number="2.3">
 <h2 data-number="2.3" class="anchored" data-anchor-id="summary-of-causal-inference-methods"><span class="header-section-number">2.3</span> Summary of Causal Inference Methods</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/hist.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:90.0%"></p>
+</figure>
+</div>
+</div>
+</div>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 25%">
@@ -1591,9 +1580,25 @@ Warning
 </tr>
 </tbody>
 </table>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Shared Limitations
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A critical limitation shared by both regression and propensity score-based methods is their reliance on the <strong>exchangeability</strong> assumption; both frameworks can only account for <strong>measured variables</strong> included in the model. Consequently, even with advanced adjustment (e.g., Double Robust Methods), these methods remain inherently subject to <strong>unmeasured confounding bias</strong> if essential risk factors or common causes are omitted from the data.</p>
+</div>
+</div>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-austin2015moving" class="csl-entry" role="listitem">
+Austin, Peter C, and Elizabeth A Stuart. 2015. <span>“Moving Towards Best Practice When Using Inverse Probability of Treatment Weighting (IPTW) Using the Propensity Score to Estimate Causal Treatment Effects in Observational Studies.”</span> <em>Statistics in Medicine</em> 34 (28): 3661–79.
+</div>
 <div id="ref-westreich2011role" class="csl-entry" role="listitem">
 Westreich, Daniel, Stephen R Cole, Michele Jonsson Funk, M Alan Brookhart, and Til Stürmer. 2011. <span>“The Role of the c-Statistic in Variable Selection for Propensity Score Models.”</span> <em>Pharmacoepidemiology and Drug Safety</em> 20 (3): 317–20.
 </div>
